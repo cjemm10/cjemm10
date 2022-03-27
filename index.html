@@ -14630,7 +14630,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </blockquote>
 <p><strong>Sean Lahman's Appearances Dataset:</strong></p>
 <blockquote><p>Contains data on how many games a player played at each position throughout the season.
-<br />We will use this to remove the pitchers from the batting dataset</p>
+<br />We will use this to remove the pitchers from the batting dataset.</p>
+</blockquote>
+<p><strong>Sean Lahman's Salary Dataset:</strong></p>
+<blockquote><p>Contains player salaries for each year up through 2016. For 2016-Present, we will list it as NaN.</p>
 </blockquote>
 
 </div>
@@ -14640,7 +14643,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create dataframe of player information like name and age</span>
@@ -14660,14 +14663,14 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;teamID&#39;</span><span class="p">:</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;lgID&#39;</span><span class="p">:</span><span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;yearID&#39;</span><span class="p">:</span><span class="s1">&#39;Year&#39;</span><span class="p">})</span>
 
 <span class="c1"># Calculate the age of a player for the given season and add it to a new column</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Age</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">Year</span> <span class="o">-</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">birthYear</span><span class="p">)</span>
+<span class="c1">#full_batting = full_batting.assign(Age = full_batting.Year - full_batting.birthYear)</span>
 
 <span class="c1"># Grabbing only needed columns</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
+<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
                              <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">]]</span>
 
 <span class="c1"># Changing columns to be ints instead of floats</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">Age</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">Age</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="c1">#full_batting.Age = full_batting.Age.astype(int)</span>
 <span class="n">full_batting</span><span class="o">.</span><span class="n">RBI</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">RBI</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">full_batting</span><span class="o">.</span><span class="n">SB</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">SB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 <span class="n">full_batting</span><span class="o">.</span><span class="n">CS</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">CS</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -14683,6 +14686,22 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="c1"># Sort by year and then reset the index</span>
 <span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
 <span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Get salary for the available players</span>
+<span class="n">lahman_file</span> <span class="o">=</span> <span class="s1">&#39;lahman2014.sqlite&#39;</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">lahman_file</span><span class="p">)</span>
+<span class="n">salaries_query</span> <span class="o">=</span> <span class="s1">&#39;SELECT playerID, yearID as Year, salary FROM Salaries&#39;</span>
+<span class="n">salaries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">salaries_query</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+
+<span class="c1"># Merge salaries into the batting table</span>
+<span class="n">salary_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span><span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+
+<span class="c1"># Rename to column to Salary</span>
+<span class="n">salary_batting</span> <span class="o">=</span> <span class="n">salary_batting</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;salary&#39;</span><span class="p">:</span><span class="s1">&#39;Salary&#39;</span><span class="p">})</span>
+<span class="n">salary_batting</span>
+
+<span class="c1"># Concat the salary batting with non-salary batting</span>
+<span class="n">full_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">salary_batting</span><span class="p">,</span> <span class="n">full_batting</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14710,7 +14729,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">appearances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tables/Appearances.csv&#39;</span><span class="p">)</span>
@@ -14725,8 +14744,60 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">full_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">appearances</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
 
 <span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[</span><span class="n">full_batting</span><span class="o">.</span><span class="n">Games_Not_Pitching</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
+<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
                              <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">]]</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Next, we want to consider the metrics that better define player value. There are a few statistics that are necessary to consider when discussing a player's value.</p>
+<p><br /><strong>WAR: Wins Above Replacement</strong></p>
+<blockquote><p>Calculates many more wins a baseball team has from a player compared to if the team replaced the player with a replacement-level player in the same position.</p>
+</blockquote>
+<p><br /><strong>OPS+: Normalized on-base plus slugging percentage</strong></p>
+<blockquote><p><strong>On-Base Percentage:</strong> The ratio of the sum of the batter's hits, walks, hit by pitches to their number of plate appearances
+<br /><strong>Slugging Percentage:</strong> The total number of bases a player records per at-bat <strong>(1B + 2Bx2 + 3Bx3 + HRx4)/AB</strong>
+<br /><strong>Normalized:</strong> Adjusts the OPS based on park factors by comparing it to league average <strong>(OPS / league OPS) x 100</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scrape data from baseball reference .csv file</span>
+<span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;baseball-reference/batting.csv&#39;</span><span class="p">)</span>
+<span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS_plus&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Rename OPS_plus to OPS+</span>
+<span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;OPS_plus&#39;</span><span class="p">:</span><span class="s1">&#39;OPS+&#39;</span><span class="p">})</span>
+
+<span class="c1"># Cast OPS+ column to integer</span>
+<span class="n">baseball_reference_table</span><span class="p">[</span><span class="s1">&#39;OPS+&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="p">[</span><span class="s1">&#39;OPS+&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">baseball_reference_table</span><span class="p">[</span><span class="s1">&#39;OPS+&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="p">[</span><span class="s1">&#39;OPS+&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Cast Age column to integer</span>
+<span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Merge dataframe from above with the nex dataframe</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">baseball_reference_table</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">])</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;salary&#39;</span><span class="p">:</span><span class="s1">&#39;Salary&#39;</span><span class="p">})</span>
+
+<span class="c1"># Reorder the columns</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS+&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
 </pre></div>
 
      </div>
@@ -14739,10 +14810,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">full_batting</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total</span>
 </pre></div>
 
      </div>
@@ -14760,7 +14831,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
 
 
 
@@ -14783,9 +14854,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
   <thead>
     <tr style="text-align: right;">
       <th></th>
+      <th>Year</th>
       <th>Name</th>
       <th>Age</th>
-      <th>Year</th>
       <th>Team</th>
       <th>Lg</th>
       <th>G</th>
@@ -14805,64 +14876,19 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <th>SH</th>
       <th>SF</th>
       <th>GIDP</th>
+      <th>OPS+</th>
+      <th>WAR</th>
+      <th>WAR_def</th>
+      <th>WAR_off</th>
+      <th>Salary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>Kurt Abbott</td>
-      <td>27</td>
       <td>1996</td>
-      <td>FLO</td>
-      <td>NL</td>
-      <td>109</td>
-      <td>320</td>
-      <td>37</td>
-      <td>81</td>
-      <td>18</td>
-      <td>7</td>
-      <td>8</td>
-      <td>33</td>
-      <td>3</td>
-      <td>3</td>
-      <td>22</td>
-      <td>99</td>
-      <td>1</td>
-      <td>3</td>
-      <td>4</td>
-      <td>0</td>
-      <td>7</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Willie McGee</td>
-      <td>38</td>
-      <td>1996</td>
-      <td>SLN</td>
-      <td>NL</td>
-      <td>123</td>
-      <td>309</td>
-      <td>52</td>
-      <td>95</td>
-      <td>15</td>
-      <td>2</td>
-      <td>5</td>
-      <td>41</td>
-      <td>5</td>
-      <td>2</td>
-      <td>18</td>
-      <td>60</td>
-      <td>2</td>
-      <td>2</td>
-      <td>1</td>
-      <td>1</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>2</th>
       <td>Quinton McCracken</td>
-      <td>26</td>
-      <td>1996</td>
+      <td>25</td>
       <td>COL</td>
       <td>NL</td>
       <td>124</td>
@@ -14882,56 +14908,131 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>12</td>
       <td>1</td>
       <td>5</td>
+      <td>87</td>
+      <td>0.25</td>
+      <td>-0.45</td>
+      <td>0.77</td>
+      <td>112000.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1996</td>
+      <td>Quinton McCracken</td>
+      <td>25</td>
+      <td>COL</td>
+      <td>NL</td>
+      <td>124</td>
+      <td>283</td>
+      <td>50</td>
+      <td>82</td>
+      <td>13</td>
+      <td>6</td>
+      <td>3</td>
+      <td>40</td>
+      <td>17</td>
+      <td>6</td>
+      <td>32</td>
+      <td>62</td>
+      <td>4</td>
+      <td>1</td>
+      <td>12</td>
+      <td>1</td>
+      <td>5</td>
+      <td>87</td>
+      <td>0.25</td>
+      <td>-0.45</td>
+      <td>0.77</td>
+      <td>112000.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1996</td>
+      <td>Derrick May</td>
+      <td>27</td>
+      <td>HOU</td>
+      <td>NL</td>
+      <td>109</td>
+      <td>259</td>
+      <td>24</td>
+      <td>65</td>
+      <td>12</td>
+      <td>3</td>
+      <td>5</td>
+      <td>33</td>
+      <td>2</td>
+      <td>2</td>
+      <td>30</td>
+      <td>33</td>
+      <td>8</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>3</td>
+      <td>93</td>
+      <td>1.01</td>
+      <td>0.20</td>
+      <td>0.55</td>
+      <td>750000.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>Ken Caminiti</td>
-      <td>33</td>
       <td>1996</td>
-      <td>SDN</td>
+      <td>Derrick May</td>
+      <td>27</td>
+      <td>HOU</td>
       <td>NL</td>
-      <td>146</td>
-      <td>546</td>
       <td>109</td>
-      <td>178</td>
-      <td>37</td>
-      <td>2</td>
-      <td>40</td>
-      <td>130</td>
-      <td>11</td>
+      <td>259</td>
+      <td>24</td>
+      <td>65</td>
+      <td>12</td>
+      <td>3</td>
       <td>5</td>
-      <td>78</td>
-      <td>99</td>
-      <td>16</td>
-      <td>4</td>
+      <td>33</td>
+      <td>2</td>
+      <td>2</td>
+      <td>30</td>
+      <td>33</td>
+      <td>8</td>
+      <td>2</td>
       <td>0</td>
-      <td>10</td>
-      <td>15</td>
+      <td>3</td>
+      <td>3</td>
+      <td>93</td>
+      <td>1.01</td>
+      <td>0.20</td>
+      <td>0.55</td>
+      <td>750000.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>Dave McCarty</td>
-      <td>27</td>
       <td>1996</td>
-      <td>SFN</td>
+      <td>John Cangelosi</td>
+      <td>33</td>
+      <td>HOU</td>
       <td>NL</td>
-      <td>91</td>
-      <td>175</td>
-      <td>16</td>
-      <td>38</td>
-      <td>3</td>
-      <td>0</td>
-      <td>6</td>
-      <td>24</td>
-      <td>2</td>
+      <td>108</td>
+      <td>262</td>
+      <td>49</td>
+      <td>69</td>
+      <td>11</td>
+      <td>4</td>
       <td>1</td>
-      <td>18</td>
-      <td>43</td>
+      <td>16</td>
+      <td>17</td>
+      <td>9</td>
+      <td>44</td>
+      <td>41</td>
       <td>0</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
       <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>4</td>
+      <td>100</td>
+      <td>1.38</td>
+      <td>0.28</td>
+      <td>0.93</td>
+      <td>280000.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -14957,37 +15058,77 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>16867</th>
-      <td>Rafael Ortega</td>
-      <td>30</td>
+      <th>15255</th>
       <td>2021</td>
-      <td>CHN</td>
-      <td>NL</td>
-      <td>103</td>
-      <td>296</td>
-      <td>44</td>
-      <td>86</td>
-      <td>14</td>
-      <td>2</td>
-      <td>11</td>
-      <td>33</td>
-      <td>12</td>
-      <td>6</td>
-      <td>30</td>
-      <td>70</td>
+      <td>Michael Brantley</td>
+      <td>34</td>
+      <td>HOU</td>
+      <td>AL</td>
+      <td>121</td>
+      <td>469</td>
+      <td>68</td>
+      <td>146</td>
+      <td>29</td>
+      <td>3</td>
+      <td>8</td>
+      <td>47</td>
       <td>1</td>
-      <td>2</td>
+      <td>0</td>
+      <td>33</td>
+      <td>53</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0</td>
+      <td>1</td>
+      <td>11</td>
+      <td>118</td>
+      <td>2.48</td>
+      <td>-0.48</td>
+      <td>2.36</td>
+      <td>16000000.0</td>
+    </tr>
+    <tr>
+      <th>15256</th>
+      <td>2021</td>
+      <td>Daniel Robertson</td>
+      <td>27</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>50</td>
+      <td>73</td>
+      <td>10</td>
+      <td>12</td>
       <td>2</td>
       <td>0</td>
+      <td>2</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+      <td>12</td>
+      <td>28</td>
+      <td>1</td>
       <td>3</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>57</td>
+      <td>-0.29</td>
+      <td>-0.16</td>
+      <td>-0.08</td>
+      <td>900000.0</td>
     </tr>
     <tr>
-      <th>16868</th>
-      <td>Amed Rosario</td>
-      <td>26</td>
+      <th>15257</th>
       <td>2021</td>
+      <td>Amed Rosario</td>
+      <td>25</td>
       <td>CLE</td>
       <td>AL</td>
       <td>141</td>
@@ -15007,12 +15148,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>0</td>
       <td>4</td>
       <td>12</td>
+      <td>99</td>
+      <td>1.94</td>
+      <td>-0.32</td>
+      <td>3.01</td>
+      <td>2400000.0</td>
     </tr>
     <tr>
-      <th>16869</th>
+      <th>15258</th>
+      <td>2021</td>
       <td>Josh Reddick</td>
       <td>34</td>
-      <td>2021</td>
       <td>ARI</td>
       <td>NL</td>
       <td>54</td>
@@ -15032,37 +15178,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>0</td>
       <td>1</td>
       <td>4</td>
+      <td>76</td>
+      <td>-0.40</td>
+      <td>-0.46</td>
+      <td>-0.09</td>
+      <td>NaN</td>
     </tr>
     <tr>
-      <th>16870</th>
-      <td>Darin Ruf</td>
-      <td>35</td>
+      <th>15259</th>
       <td>2021</td>
-      <td>SFN</td>
-      <td>NL</td>
-      <td>117</td>
-      <td>262</td>
-      <td>41</td>
-      <td>71</td>
-      <td>13</td>
-      <td>2</td>
-      <td>16</td>
-      <td>43</td>
-      <td>2</td>
-      <td>0</td>
-      <td>46</td>
-      <td>87</td>
-      <td>2</td>
-      <td>3</td>
-      <td>0</td>
-      <td>1</td>
-      <td>8</td>
-    </tr>
-    <tr>
-      <th>16871</th>
       <td>Luke Williams</td>
-      <td>25</td>
-      <td>2021</td>
+      <td>24</td>
       <td>PHI</td>
       <td>NL</td>
       <td>58</td>
@@ -15082,10 +15208,15 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>0</td>
       <td>0</td>
       <td>2</td>
+      <td>72</td>
+      <td>0.05</td>
+      <td>-0.12</td>
+      <td>0.15</td>
+      <td>NaN</td>
     </tr>
   </tbody>
 </table>
-<p>15574 rows × 22 columns</p>
+<p>15260 rows × 27 columns</p>
 </div>
 </div>
 
