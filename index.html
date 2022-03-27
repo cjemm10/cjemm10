@@ -14643,7 +14643,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create dataframe of player information like name and age</span>
@@ -14729,7 +14729,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">appearances</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tables/Appearances.csv&#39;</span><span class="p">)</span>
@@ -14774,7 +14774,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scrape data from baseball reference .csv file</span>
@@ -14797,7 +14797,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;salary&#39;</span><span class="p">:</span><span class="s1">&#39;Salary&#39;</span><span class="p">})</span>
 
 <span class="c1"># Reorder the columns</span>
-<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS+&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;CS&#39;</span><span class="p">,</span> \
+               <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS+&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14810,7 +14813,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[30]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">total</span>
@@ -14831,7 +14834,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-OutputArea-child">
 
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[30]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -14915,67 +14918,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>112000.0</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>1996</td>
-      <td>Quinton McCracken</td>
-      <td>25</td>
-      <td>COL</td>
-      <td>NL</td>
-      <td>124</td>
-      <td>283</td>
-      <td>50</td>
-      <td>82</td>
-      <td>13</td>
-      <td>6</td>
-      <td>3</td>
-      <td>40</td>
-      <td>17</td>
-      <td>6</td>
-      <td>32</td>
-      <td>62</td>
-      <td>4</td>
-      <td>1</td>
-      <td>12</td>
-      <td>1</td>
-      <td>5</td>
-      <td>87</td>
-      <td>0.25</td>
-      <td>-0.45</td>
-      <td>0.77</td>
-      <td>112000.0</td>
-    </tr>
-    <tr>
       <th>2</th>
-      <td>1996</td>
-      <td>Derrick May</td>
-      <td>27</td>
-      <td>HOU</td>
-      <td>NL</td>
-      <td>109</td>
-      <td>259</td>
-      <td>24</td>
-      <td>65</td>
-      <td>12</td>
-      <td>3</td>
-      <td>5</td>
-      <td>33</td>
-      <td>2</td>
-      <td>2</td>
-      <td>30</td>
-      <td>33</td>
-      <td>8</td>
-      <td>2</td>
-      <td>0</td>
-      <td>3</td>
-      <td>3</td>
-      <td>93</td>
-      <td>1.01</td>
-      <td>0.20</td>
-      <td>0.55</td>
-      <td>750000.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
       <td>1996</td>
       <td>Derrick May</td>
       <td>27</td>
@@ -15033,6 +14976,66 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>0.28</td>
       <td>0.93</td>
       <td>280000.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1996</td>
+      <td>Fred McGriff</td>
+      <td>32</td>
+      <td>ATL</td>
+      <td>NL</td>
+      <td>159</td>
+      <td>617</td>
+      <td>81</td>
+      <td>182</td>
+      <td>37</td>
+      <td>1</td>
+      <td>28</td>
+      <td>107</td>
+      <td>7</td>
+      <td>3</td>
+      <td>68</td>
+      <td>116</td>
+      <td>12</td>
+      <td>2</td>
+      <td>0</td>
+      <td>4</td>
+      <td>20</td>
+      <td>120</td>
+      <td>1.67</td>
+      <td>-1.29</td>
+      <td>2.14</td>
+      <td>5050000.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>1996</td>
+      <td>Jose Canseco</td>
+      <td>31</td>
+      <td>BOS</td>
+      <td>AL</td>
+      <td>96</td>
+      <td>360</td>
+      <td>68</td>
+      <td>104</td>
+      <td>22</td>
+      <td>1</td>
+      <td>28</td>
+      <td>82</td>
+      <td>3</td>
+      <td>1</td>
+      <td>63</td>
+      <td>82</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0</td>
+      <td>3</td>
+      <td>7</td>
+      <td>145</td>
+      <td>2.96</td>
+      <td>-0.73</td>
+      <td>2.99</td>
+      <td>4725000.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -15216,7 +15219,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
     </tr>
   </tbody>
 </table>
-<p>15260 rows × 27 columns</p>
+<p>8235 rows × 27 columns</p>
 </div>
 </div>
 
