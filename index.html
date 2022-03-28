@@ -14654,54 +14654,50 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 <span class="c1"># Create dataframe of batting statistics</span>
 <span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;tables/Batting.csv&#39;</span><span class="p">)</span>
-<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[</span><span class="n">batting_table</span><span class="o">.</span><span class="n">yearID</span> <span class="o">&gt;</span> <span class="mi">1995</span><span class="p">]</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[</span><span class="n">batting_table</span><span class="o">.</span><span class="n">yearID</span> <span class="o">&gt;</span> <span class="mi">2010</span><span class="p">]</span>
 
 <span class="c1"># Combine the pitching and batting stats</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">shortened_player</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;playerID&#39;</span><span class="p">)</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">shortened_player</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;playerID&#39;</span><span class="p">)</span>
 
 <span class="c1"># Rename columns</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;teamID&#39;</span><span class="p">:</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;lgID&#39;</span><span class="p">:</span><span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;yearID&#39;</span><span class="p">:</span><span class="s1">&#39;Year&#39;</span><span class="p">})</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;teamID&#39;</span><span class="p">:</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;lgID&#39;</span><span class="p">:</span><span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;yearID&#39;</span><span class="p">:</span><span class="s1">&#39;Year&#39;</span><span class="p">})</span>
 
 <span class="c1"># Calculate the age of a player for the given season and add it to a new column</span>
 <span class="c1">#full_batting = full_batting.assign(Age = full_batting.Year - full_batting.birthYear)</span>
 
 <span class="c1"># Grabbing only needed columns</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
                              <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">]]</span>
 
 <span class="c1"># Changing columns to be ints instead of floats</span>
 <span class="c1">#full_batting.Age = full_batting.Age.astype(int)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">RBI</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">RBI</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">SB</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">SB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">CS</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">CS</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">SO</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">SO</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">IBB</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">IBB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">HBP</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">HBP</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">SH</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">SH</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">SF</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">SF</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">full_batting</span><span class="o">.</span><span class="n">GIDP</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">GIDP</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">RBI</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">RBI</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">SB</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">SB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">CS</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">CS</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">SO</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">SO</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">IBB</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">IBB</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">HBP</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">HBP</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">SH</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">SH</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">SF</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">SF</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">batting_table</span><span class="o">.</span><span class="n">GIDP</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">GIDP</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[</span><span class="n">full_batting</span><span class="o">.</span><span class="n">AB</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">]</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[</span><span class="n">batting_table</span><span class="o">.</span><span class="n">AB</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">]</span>
                           
 <span class="c1"># Sort by year and then reset the index</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Year&#39;</span><span class="p">)</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Get salary for the available players</span>
 <span class="n">lahman_file</span> <span class="o">=</span> <span class="s1">&#39;lahman2014.sqlite&#39;</span>
 <span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">lahman_file</span><span class="p">)</span>
-<span class="n">salaries_query</span> <span class="o">=</span> <span class="s1">&#39;SELECT playerID, yearID as Year, salary FROM Salaries&#39;</span>
+<span class="n">salaries_query</span> <span class="o">=</span> <span class="s1">&#39;SELECT playerID, yearID as Year, salary as Salary FROM Salaries&#39;</span>
 <span class="n">salaries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql</span><span class="p">(</span><span class="n">salaries_query</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
 
 <span class="c1"># Merge salaries into the batting table</span>
-<span class="n">salary_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span><span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-
-<span class="c1"># Rename to column to Salary</span>
-<span class="n">salary_batting</span> <span class="o">=</span> <span class="n">salary_batting</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;salary&#39;</span><span class="p">:</span><span class="s1">&#39;Salary&#39;</span><span class="p">})</span>
-<span class="n">salary_batting</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span><span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
 
 <span class="c1"># Concat the salary batting with non-salary batting</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">salary_batting</span><span class="p">,</span> <span class="n">full_batting</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1">#batting_table = pd.concat([batting_table, full_batting], axis=0)</span>
 </pre></div>
 
      </div>
@@ -14741,10 +14737,10 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 
 <span class="c1"># Merge</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">appearances</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">appearances</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
 
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[</span><span class="n">full_batting</span><span class="o">.</span><span class="n">Games_Not_Pitching</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span>
-<span class="n">full_batting</span> <span class="o">=</span> <span class="n">full_batting</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[</span><span class="n">batting_table</span><span class="o">.</span><span class="n">Games_Not_Pitching</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
                              <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">]]</span>
 </pre></div>
 
@@ -14779,7 +14775,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Scrape data from baseball reference .csv file</span>
 <span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;baseball-reference/batting.csv&#39;</span><span class="p">)</span>
-<span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS_plus&#39;</span><span class="p">]]</span>
+<span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS_plus&#39;</span><span class="p">]]</span>
 
 <span class="c1"># Rename OPS_plus to OPS+</span>
 <span class="n">baseball_reference_table</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;OPS_plus&#39;</span><span class="p">:</span><span class="s1">&#39;OPS+&#39;</span><span class="p">})</span>
@@ -14793,14 +14789,13 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span> <span class="o">=</span> <span class="n">baseball_reference_table</span><span class="o">.</span><span class="n">Age</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
 <span class="c1"># Merge dataframe from above with the nex dataframe</span>
-<span class="n">total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">full_batting</span><span class="p">,</span> <span class="n">baseball_reference_table</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">])</span>
-<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;salary&#39;</span><span class="p">:</span><span class="s1">&#39;Salary&#39;</span><span class="p">})</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">baseball_reference_table</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">])</span>
 
 <span class="c1"># Reorder the columns</span>
-<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;CS&#39;</span><span class="p">,</span> \
-               <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS+&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">,</span> <span class="s1">&#39;Salary&#39;</span><span class="p">]]</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[[</span><span class="s1">&#39;Year&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Age&#39;</span><span class="p">,</span> <span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> <span class="s1">&#39;CS&#39;</span><span class="p">,</span> \
+               <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">,</span> <span class="s1">&#39;OPS+&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_def&#39;</span><span class="p">,</span> <span class="s1">&#39;WAR_off&#39;</span><span class="p">]]</span>
 
-<span class="n">total</span> <span class="o">=</span> <span class="n">total</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -14816,7 +14811,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">total</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batting_table</span>
 </pre></div>
 
      </div>
@@ -14883,159 +14878,753 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <th>WAR</th>
       <th>WAR_def</th>
       <th>WAR_off</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2011</td>
+      <td>Bobby Abreu</td>
+      <td>37</td>
+      <td>LAA</td>
+      <td>AL</td>
+      <td>142</td>
+      <td>502</td>
+      <td>54</td>
+      <td>127</td>
+      <td>30</td>
+      <td>1</td>
+      <td>8</td>
+      <td>60</td>
+      <td>21</td>
+      <td>5</td>
+      <td>78</td>
+      <td>113</td>
+      <td>5</td>
+      <td>1</td>
+      <td>1</td>
+      <td>3</td>
+      <td>8</td>
+      <td>105</td>
+      <td>1.60</td>
+      <td>-1.47</td>
+      <td>1.98</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2011</td>
+      <td>Craig Counsell</td>
+      <td>40</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>107</td>
+      <td>157</td>
+      <td>19</td>
+      <td>28</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>9</td>
+      <td>2</td>
+      <td>1</td>
+      <td>20</td>
+      <td>21</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+      <td>2</td>
+      <td>1</td>
+      <td>39</td>
+      <td>0.21</td>
+      <td>0.99</td>
+      <td>-0.57</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2011</td>
+      <td>Justin Morneau</td>
+      <td>30</td>
+      <td>MIN</td>
+      <td>AL</td>
+      <td>69</td>
+      <td>264</td>
+      <td>19</td>
+      <td>60</td>
+      <td>16</td>
+      <td>0</td>
+      <td>4</td>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>19</td>
+      <td>44</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>70</td>
+      <td>-1.11</td>
+      <td>-0.76</td>
+      <td>-0.77</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2011</td>
+      <td>Nyjer Morgan</td>
+      <td>30</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>119</td>
+      <td>378</td>
+      <td>61</td>
+      <td>115</td>
+      <td>20</td>
+      <td>6</td>
+      <td>4</td>
+      <td>37</td>
+      <td>13</td>
+      <td>4</td>
+      <td>19</td>
+      <td>70</td>
+      <td>0</td>
+      <td>14</td>
+      <td>15</td>
+      <td>3</td>
+      <td>6</td>
+      <td>111</td>
+      <td>2.95</td>
+      <td>0.49</td>
+      <td>2.47</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2011</td>
+      <td>David Murphy</td>
+      <td>29</td>
+      <td>TEX</td>
+      <td>AL</td>
+      <td>120</td>
+      <td>404</td>
+      <td>46</td>
+      <td>111</td>
+      <td>14</td>
+      <td>2</td>
+      <td>11</td>
+      <td>46</td>
+      <td>11</td>
+      <td>6</td>
+      <td>33</td>
+      <td>61</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11</td>
+      <td>92</td>
+      <td>0.82</td>
+      <td>-0.20</td>
+      <td>0.57</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1181</th>
+      <td>2014</td>
+      <td>Lonnie Chisenhall</td>
+      <td>25</td>
+      <td>CLE</td>
+      <td>AL</td>
+      <td>142</td>
+      <td>478</td>
+      <td>62</td>
+      <td>134</td>
+      <td>29</td>
+      <td>1</td>
+      <td>13</td>
+      <td>59</td>
+      <td>3</td>
+      <td>1</td>
+      <td>39</td>
+      <td>99</td>
+      <td>3</td>
+      <td>8</td>
+      <td>4</td>
+      <td>3</td>
+      <td>8</td>
+      <td>114</td>
+      <td>1.53</td>
+      <td>-1.13</td>
+      <td>2.78</td>
+    </tr>
+    <tr>
+      <th>1182</th>
+      <td>2014</td>
+      <td>Craig Gentry</td>
+      <td>30</td>
+      <td>OAK</td>
+      <td>AL</td>
+      <td>94</td>
+      <td>232</td>
+      <td>38</td>
+      <td>59</td>
+      <td>6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td>20</td>
+      <td>2</td>
+      <td>17</td>
+      <td>44</td>
+      <td>2</td>
+      <td>5</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>76</td>
+      <td>1.85</td>
+      <td>1.00</td>
+      <td>0.82</td>
+    </tr>
+    <tr>
+      <th>1183</th>
+      <td>2014</td>
+      <td>Steve Clevenger</td>
+      <td>28</td>
+      <td>BAL</td>
+      <td>AL</td>
+      <td>35</td>
+      <td>89</td>
+      <td>8</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>19</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>75</td>
+      <td>-0.03</td>
+      <td>-0.16</td>
+      <td>0.29</td>
+    </tr>
+    <tr>
+      <th>1184</th>
+      <td>2014</td>
+      <td>Carlos Gomez</td>
+      <td>28</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>148</td>
+      <td>574</td>
+      <td>95</td>
+      <td>163</td>
+      <td>34</td>
+      <td>4</td>
+      <td>23</td>
+      <td>73</td>
+      <td>34</td>
+      <td>12</td>
+      <td>47</td>
+      <td>141</td>
+      <td>0</td>
+      <td>19</td>
+      <td>1</td>
+      <td>3</td>
+      <td>10</td>
+      <td>129</td>
+      <td>4.70</td>
+      <td>0.38</td>
+      <td>4.70</td>
+    </tr>
+    <tr>
+      <th>1185</th>
+      <td>2014</td>
+      <td>David Freese</td>
+      <td>31</td>
+      <td>LAA</td>
+      <td>AL</td>
+      <td>134</td>
+      <td>462</td>
+      <td>53</td>
+      <td>120</td>
+      <td>25</td>
+      <td>1</td>
+      <td>10</td>
+      <td>55</td>
+      <td>1</td>
+      <td>3</td>
+      <td>38</td>
+      <td>124</td>
+      <td>0</td>
+      <td>6</td>
+      <td>0</td>
+      <td>5</td>
+      <td>10</td>
+      <td>103</td>
+      <td>1.69</td>
+      <td>-0.45</td>
+      <td>2.40</td>
+    </tr>
+  </tbody>
+</table>
+<p>1028 rows × 26 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Scrape-Salaries-for-Players-from-2011-2021">Scrape Salaries for Players from 2011-2021<a class="anchor-link" href="#Scrape-Salaries-for-Players-from-2011-2021">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Having a discussion about player value would be worthless if we did not include the salaries for each player for every year. Unfortunately, the updated (to the end of the 2021 season) Lahman dataset did not have salaries for any of the players, nor did the baseball reference .csv file. Instead, I had to do some research and found that Cot's Baseball Contracts (<a href="https://legacy.baseballprospectus.com/compensation/cots/">https://legacy.baseballprospectus.com/compensation/cots/</a>) had salaries for all players from 2000-2021. There were individual .csv files for each season, so using excel, I just merged them all into one table in one file. I then uploaded that file to my workspace and read it as normal (using the read_csv() function). Below is a little bit of data manipulation; just trying to get the format of the names to be the exact format that my dataframe had, so that it would smoothly merge into my dataframe.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">salaries</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;salaries/salaries.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Split the Name colum into first name and last name (originally stored as &#39;Last, First&#39;)</span>
+<span class="c1"># and store it as a separate dataframe</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">salaries</span><span class="o">.</span><span class="n">Player</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="kc">True</span><span class="p">)[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]]</span>
+
+<span class="c1"># Create a new column called Name that has the format &#39;First Last&#39;</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Name</span> <span class="o">=</span> <span class="n">names</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">names</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">))</span>
+
+<span class="c1"># Remove all columns except for the new name column</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="p">[[</span><span class="s1">&#39;Name&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Add the years to the names dataframe</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Year</span> <span class="o">=</span> <span class="n">salaries</span><span class="o">.</span><span class="n">Year</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+
+<span class="c1"># Add the salaries to the names dataframe</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">names</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Salary</span> <span class="o">=</span> <span class="n">salaries</span><span class="o">.</span><span class="n">Salary</span><span class="o">.</span><span class="n">to_list</span><span class="p">())</span>
+
+<span class="c1"># Assign names to the salaries variable</span>
+<span class="n">salaries</span> <span class="o">=</span> <span class="n">names</span>
+
+<span class="n">salaries</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>Year</th>
       <th>Salary</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>1996</td>
-      <td>Quinton McCracken</td>
-      <td>25</td>
-      <td>COL</td>
-      <td>NL</td>
-      <td>124</td>
-      <td>283</td>
-      <td>50</td>
-      <td>82</td>
-      <td>13</td>
-      <td>6</td>
-      <td>3</td>
-      <td>40</td>
-      <td>17</td>
-      <td>6</td>
-      <td>32</td>
-      <td>62</td>
-      <td>4</td>
-      <td>1</td>
-      <td>12</td>
-      <td>1</td>
-      <td>5</td>
-      <td>87</td>
-      <td>0.25</td>
-      <td>-0.45</td>
-      <td>0.77</td>
-      <td>112000.0</td>
+      <td>Mike Trout</td>
+      <td>2021</td>
+      <td>$37,116,667</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Gerrit Cole</td>
+      <td>2021</td>
+      <td>$36,000,000</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1996</td>
-      <td>Derrick May</td>
-      <td>27</td>
-      <td>HOU</td>
-      <td>NL</td>
-      <td>109</td>
-      <td>259</td>
-      <td>24</td>
-      <td>65</td>
-      <td>12</td>
-      <td>3</td>
-      <td>5</td>
-      <td>33</td>
-      <td>2</td>
-      <td>2</td>
-      <td>30</td>
-      <td>33</td>
-      <td>8</td>
-      <td>2</td>
-      <td>0</td>
-      <td>3</td>
-      <td>3</td>
-      <td>93</td>
-      <td>1.01</td>
-      <td>0.20</td>
-      <td>0.55</td>
-      <td>750000.0</td>
+      <td>Jacob deGrom</td>
+      <td>2021</td>
+      <td>$36,000,000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Stephen Strasburg</td>
+      <td>2021</td>
+      <td>$35,000,000</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>1996</td>
-      <td>John Cangelosi</td>
-      <td>33</td>
-      <td>HOU</td>
-      <td>NL</td>
-      <td>108</td>
-      <td>262</td>
-      <td>49</td>
-      <td>69</td>
-      <td>11</td>
-      <td>4</td>
+      <td>Nolan Arenado</td>
+      <td>2021</td>
+      <td>$35,000,000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>11080</th>
+      <td>Brayan Villarreal</td>
+      <td>2011</td>
+      <td>$414,000</td>
+    </tr>
+    <tr>
+      <th>11081</th>
+      <td>Jordan Walden</td>
+      <td>2011</td>
+      <td>$414,000</td>
+    </tr>
+    <tr>
+      <th>11082</th>
+      <td>Ryan Webb</td>
+      <td>2011</td>
+      <td>$414,000</td>
+    </tr>
+    <tr>
+      <th>11083</th>
+      <td>Tom Wilhelmsen</td>
+      <td>2011</td>
+      <td>$414,000</td>
+    </tr>
+    <tr>
+      <th>11084</th>
+      <td>Matt Young</td>
+      <td>2011</td>
+      <td>$414,000</td>
+    </tr>
+  </tbody>
+</table>
+<p>11085 rows × 3 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Add-Salaries-to-Batting-Statistics-Dataframe">Add Salaries to Batting Statistics Dataframe<a class="anchor-link" href="#Add-Salaries-to-Batting-Statistics-Dataframe">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Now that we have salaries for every single player in the last decade, we can merge the salary data onto the table that we have that contains the batting statistics for every single player from 2011-2021. Below is the code that achieves this.</p>
+
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">])</span>
+<span class="n">batting_table</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Year</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Team</th>
+      <th>Lg</th>
+      <th>G</th>
+      <th>AB</th>
+      <th>R</th>
+      <th>H</th>
+      <th>2B</th>
+      <th>3B</th>
+      <th>HR</th>
+      <th>RBI</th>
+      <th>SB</th>
+      <th>CS</th>
+      <th>BB</th>
+      <th>SO</th>
+      <th>IBB</th>
+      <th>HBP</th>
+      <th>SH</th>
+      <th>SF</th>
+      <th>GIDP</th>
+      <th>OPS+</th>
+      <th>WAR</th>
+      <th>WAR_def</th>
+      <th>WAR_off</th>
+      <th>Salary</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2011</td>
+      <td>Bobby Abreu</td>
+      <td>37</td>
+      <td>LAA</td>
+      <td>AL</td>
+      <td>142</td>
+      <td>502</td>
+      <td>54</td>
+      <td>127</td>
+      <td>30</td>
       <td>1</td>
-      <td>16</td>
-      <td>17</td>
-      <td>9</td>
-      <td>44</td>
-      <td>41</td>
-      <td>0</td>
+      <td>8</td>
+      <td>60</td>
+      <td>21</td>
+      <td>5</td>
+      <td>78</td>
+      <td>113</td>
       <td>5</td>
       <td>1</td>
       <td>1</td>
-      <td>4</td>
-      <td>100</td>
-      <td>1.38</td>
-      <td>0.28</td>
-      <td>0.93</td>
-      <td>280000.0</td>
+      <td>3</td>
+      <td>8</td>
+      <td>105</td>
+      <td>1.60</td>
+      <td>-1.47</td>
+      <td>1.98</td>
+      <td>$9,000,000</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>1996</td>
-      <td>Fred McGriff</td>
-      <td>32</td>
-      <td>ATL</td>
+      <th>1</th>
+      <td>2011</td>
+      <td>Craig Counsell</td>
+      <td>40</td>
+      <td>MIL</td>
       <td>NL</td>
-      <td>159</td>
-      <td>617</td>
-      <td>81</td>
-      <td>182</td>
-      <td>37</td>
-      <td>1</td>
-      <td>28</td>
       <td>107</td>
-      <td>7</td>
-      <td>3</td>
-      <td>68</td>
-      <td>116</td>
-      <td>12</td>
+      <td>157</td>
+      <td>19</td>
+      <td>28</td>
       <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>9</td>
+      <td>2</td>
+      <td>1</td>
+      <td>20</td>
+      <td>21</td>
+      <td>2</td>
+      <td>3</td>
+      <td>5</td>
+      <td>2</td>
+      <td>1</td>
+      <td>39</td>
+      <td>0.21</td>
+      <td>0.99</td>
+      <td>-0.57</td>
+      <td>$1,400,000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2011</td>
+      <td>Justin Morneau</td>
+      <td>30</td>
+      <td>MIN</td>
+      <td>AL</td>
+      <td>69</td>
+      <td>264</td>
+      <td>19</td>
+      <td>60</td>
+      <td>16</td>
       <td>0</td>
       <td>4</td>
-      <td>20</td>
-      <td>120</td>
-      <td>1.67</td>
-      <td>-1.29</td>
-      <td>2.14</td>
-      <td>5050000.0</td>
+      <td>30</td>
+      <td>0</td>
+      <td>0</td>
+      <td>19</td>
+      <td>44</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>2</td>
+      <td>8</td>
+      <td>70</td>
+      <td>-1.11</td>
+      <td>-0.76</td>
+      <td>-0.77</td>
+      <td>$15,000,000</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>1996</td>
-      <td>Jose Canseco</td>
-      <td>31</td>
-      <td>BOS</td>
-      <td>AL</td>
-      <td>96</td>
-      <td>360</td>
-      <td>68</td>
-      <td>104</td>
-      <td>22</td>
-      <td>1</td>
-      <td>28</td>
-      <td>82</td>
-      <td>3</td>
-      <td>1</td>
-      <td>63</td>
-      <td>82</td>
+      <th>3</th>
+      <td>2011</td>
+      <td>Nyjer Morgan</td>
+      <td>30</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>119</td>
+      <td>378</td>
+      <td>61</td>
+      <td>115</td>
+      <td>20</td>
+      <td>6</td>
+      <td>4</td>
+      <td>37</td>
+      <td>13</td>
+      <td>4</td>
+      <td>19</td>
+      <td>70</td>
+      <td>0</td>
+      <td>14</td>
+      <td>15</td>
       <td>3</td>
       <td>6</td>
-      <td>0</td>
+      <td>111</td>
+      <td>2.95</td>
+      <td>0.49</td>
+      <td>2.47</td>
+      <td>$450,000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2011</td>
+      <td>David Murphy</td>
+      <td>29</td>
+      <td>TEX</td>
+      <td>AL</td>
+      <td>120</td>
+      <td>404</td>
+      <td>46</td>
+      <td>111</td>
+      <td>14</td>
+      <td>2</td>
+      <td>11</td>
+      <td>46</td>
+      <td>11</td>
+      <td>6</td>
+      <td>33</td>
+      <td>61</td>
       <td>3</td>
-      <td>7</td>
-      <td>145</td>
-      <td>2.96</td>
-      <td>-0.73</td>
-      <td>2.99</td>
-      <td>4725000.0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>11</td>
+      <td>92</td>
+      <td>0.82</td>
+      <td>-0.20</td>
+      <td>0.57</td>
+      <td>$2,400,000</td>
     </tr>
     <tr>
       <th>...</th>
@@ -15068,158 +15657,158 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
       <td>...</td>
     </tr>
     <tr>
-      <th>15255</th>
-      <td>2021</td>
-      <td>Michael Brantley</td>
-      <td>34</td>
-      <td>HOU</td>
-      <td>AL</td>
-      <td>121</td>
-      <td>469</td>
-      <td>68</td>
-      <td>146</td>
-      <td>29</td>
-      <td>3</td>
-      <td>8</td>
-      <td>47</td>
-      <td>1</td>
-      <td>0</td>
-      <td>33</td>
-      <td>53</td>
-      <td>1</td>
-      <td>5</td>
-      <td>0</td>
-      <td>1</td>
-      <td>11</td>
-      <td>118</td>
-      <td>2.48</td>
-      <td>-0.48</td>
-      <td>2.36</td>
-      <td>16000000.0</td>
-    </tr>
-    <tr>
-      <th>15256</th>
-      <td>2021</td>
-      <td>Daniel Robertson</td>
-      <td>27</td>
-      <td>MIL</td>
-      <td>NL</td>
-      <td>50</td>
-      <td>73</td>
-      <td>10</td>
-      <td>12</td>
-      <td>2</td>
-      <td>0</td>
-      <td>2</td>
-      <td>4</td>
-      <td>0</td>
-      <td>0</td>
-      <td>12</td>
-      <td>28</td>
-      <td>1</td>
-      <td>3</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>57</td>
-      <td>-0.29</td>
-      <td>-0.16</td>
-      <td>-0.08</td>
-      <td>900000.0</td>
-    </tr>
-    <tr>
-      <th>15257</th>
-      <td>2021</td>
-      <td>Amed Rosario</td>
+      <th>974</th>
+      <td>2014</td>
+      <td>Lonnie Chisenhall</td>
       <td>25</td>
       <td>CLE</td>
       <td>AL</td>
-      <td>141</td>
-      <td>550</td>
-      <td>77</td>
-      <td>155</td>
-      <td>25</td>
-      <td>6</td>
-      <td>11</td>
-      <td>57</td>
+      <td>142</td>
+      <td>478</td>
+      <td>62</td>
+      <td>134</td>
+      <td>29</td>
+      <td>1</td>
       <td>13</td>
-      <td>0</td>
-      <td>31</td>
-      <td>120</td>
-      <td>0</td>
+      <td>59</td>
       <td>3</td>
-      <td>0</td>
-      <td>4</td>
-      <td>12</td>
-      <td>99</td>
-      <td>1.94</td>
-      <td>-0.32</td>
-      <td>3.01</td>
-      <td>2400000.0</td>
-    </tr>
-    <tr>
-      <th>15258</th>
-      <td>2021</td>
-      <td>Josh Reddick</td>
-      <td>34</td>
-      <td>ARI</td>
-      <td>NL</td>
-      <td>54</td>
-      <td>151</td>
-      <td>15</td>
+      <td>1</td>
       <td>39</td>
-      <td>11</td>
-      <td>0</td>
-      <td>2</td>
-      <td>21</td>
-      <td>0</td>
-      <td>0</td>
-      <td>6</td>
-      <td>31</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
+      <td>99</td>
+      <td>3</td>
+      <td>8</td>
       <td>4</td>
-      <td>76</td>
-      <td>-0.40</td>
-      <td>-0.46</td>
-      <td>-0.09</td>
-      <td>NaN</td>
+      <td>3</td>
+      <td>8</td>
+      <td>114</td>
+      <td>1.53</td>
+      <td>-1.13</td>
+      <td>2.78</td>
+      <td>$510,800</td>
     </tr>
     <tr>
-      <th>15259</th>
-      <td>2021</td>
-      <td>Luke Williams</td>
-      <td>24</td>
-      <td>PHI</td>
-      <td>NL</td>
-      <td>58</td>
-      <td>98</td>
-      <td>8</td>
-      <td>24</td>
-      <td>4</td>
-      <td>0</td>
-      <td>1</td>
+      <th>975</th>
+      <td>2014</td>
+      <td>Craig Gentry</td>
+      <td>30</td>
+      <td>OAK</td>
+      <td>AL</td>
+      <td>94</td>
+      <td>232</td>
+      <td>38</td>
+      <td>59</td>
       <td>6</td>
+      <td>1</td>
+      <td>0</td>
+      <td>12</td>
+      <td>20</td>
       <td>2</td>
+      <td>17</td>
+      <td>44</td>
       <td>2</td>
-      <td>10</td>
+      <td>5</td>
+      <td>2</td>
+      <td>0</td>
+      <td>2</td>
+      <td>76</td>
+      <td>1.85</td>
+      <td>1.00</td>
+      <td>0.82</td>
+      <td>$1,145,000</td>
+    </tr>
+    <tr>
+      <th>976</th>
+      <td>2014</td>
+      <td>Steve Clevenger</td>
+      <td>28</td>
+      <td>BAL</td>
+      <td>AL</td>
+      <td>35</td>
+      <td>89</td>
+      <td>8</td>
+      <td>20</td>
+      <td>8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0</td>
+      <td>8</td>
+      <td>19</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>75</td>
+      <td>-0.03</td>
+      <td>-0.16</td>
+      <td>0.29</td>
+      <td>$505,000</td>
+    </tr>
+    <tr>
+      <th>977</th>
+      <td>2014</td>
+      <td>Carlos Gomez</td>
+      <td>28</td>
+      <td>MIL</td>
+      <td>NL</td>
+      <td>148</td>
+      <td>574</td>
+      <td>95</td>
+      <td>163</td>
+      <td>34</td>
+      <td>4</td>
       <td>23</td>
+      <td>73</td>
+      <td>34</td>
+      <td>12</td>
+      <td>47</td>
+      <td>141</td>
       <td>0</td>
+      <td>19</td>
+      <td>1</td>
+      <td>3</td>
+      <td>10</td>
+      <td>129</td>
+      <td>4.70</td>
+      <td>0.38</td>
+      <td>4.70</td>
+      <td>$7,000,000</td>
+    </tr>
+    <tr>
+      <th>978</th>
+      <td>2014</td>
+      <td>David Freese</td>
+      <td>31</td>
+      <td>LAA</td>
+      <td>AL</td>
+      <td>134</td>
+      <td>462</td>
+      <td>53</td>
+      <td>120</td>
+      <td>25</td>
+      <td>1</td>
+      <td>10</td>
+      <td>55</td>
+      <td>1</td>
+      <td>3</td>
+      <td>38</td>
+      <td>124</td>
       <td>0</td>
+      <td>6</td>
       <td>0</td>
-      <td>0</td>
-      <td>2</td>
-      <td>72</td>
-      <td>0.05</td>
-      <td>-0.12</td>
-      <td>0.15</td>
-      <td>NaN</td>
+      <td>5</td>
+      <td>10</td>
+      <td>103</td>
+      <td>1.69</td>
+      <td>-0.45</td>
+      <td>2.40</td>
+      <td>$5,050,000</td>
     </tr>
   </tbody>
 </table>
-<p>8235 rows × 27 columns</p>
+<p>979 rows × 27 columns</p>
 </div>
 </div>
 
@@ -15227,6 +15816,22 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
