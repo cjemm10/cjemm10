@@ -14582,6 +14582,8 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="kn">import</span> <span class="nn">matplotlib.ticker</span> <span class="k">as</span> <span class="nn">mticker</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 </pre></div>
@@ -14614,7 +14616,7 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Part-I:-Scraping-Batting-Data-for-Position-Players">Part I: Scraping Batting Data for Position Players<a class="anchor-link" href="#Part-I:-Scraping-Batting-Data-for-Position-Players">&#182;</a></h3>
+<h3 id="Part-I:-Scraping-Position-Player-Data-for-2011-2021-Seasons">Part I: Scraping Position Player Data for 2011-2021 Seasons<a class="anchor-link" href="#Part-I:-Scraping-Position-Player-Data-for-2011-2021-Seasons">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14662,9 +14664,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <span class="c1"># Rename columns</span>
 <span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;teamID&#39;</span><span class="p">:</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;lgID&#39;</span><span class="p">:</span><span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;yearID&#39;</span><span class="p">:</span><span class="s1">&#39;Year&#39;</span><span class="p">})</span>
 
-<span class="c1"># Calculate the age of a player for the given season and add it to a new column</span>
-<span class="c1">#full_batting = full_batting.assign(Age = full_batting.Year - full_batting.birthYear)</span>
-
 <span class="c1"># Grabbing only needed columns</span>
 <span class="n">batting_table</span> <span class="o">=</span> <span class="n">batting_table</span><span class="p">[[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span> <span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">,</span><span class="s1">&#39;Team&#39;</span><span class="p">,</span> <span class="s1">&#39;Lg&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;AB&#39;</span><span class="p">,</span> <span class="s1">&#39;R&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;2B&#39;</span><span class="p">,</span> <span class="s1">&#39;3B&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;RBI&#39;</span><span class="p">,</span> <span class="s1">&#39;SB&#39;</span><span class="p">,</span> \
                              <span class="s1">&#39;CS&#39;</span><span class="p">,</span> <span class="s1">&#39;BB&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">,</span> <span class="s1">&#39;IBB&#39;</span><span class="p">,</span> <span class="s1">&#39;HBP&#39;</span><span class="p">,</span> <span class="s1">&#39;SH&#39;</span><span class="p">,</span> <span class="s1">&#39;SF&#39;</span><span class="p">,</span> <span class="s1">&#39;GIDP&#39;</span><span class="p">]]</span>
@@ -14695,9 +14694,6 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 <span class="c1"># Merge salaries into the batting table</span>
 <span class="n">batting_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">batting_table</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;playerID&#39;</span><span class="p">,</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span><span class="n">how</span> <span class="o">=</span> <span class="s1">&#39;inner&#39;</span><span class="p">)</span>
-
-<span class="c1"># Concat the salary batting with non-salary batting</span>
-<span class="c1">#batting_table = pd.concat([batting_table, full_batting], axis=0)</span>
 </pre></div>
 
      </div>
@@ -15818,20 +15814,449 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 
 </div>
 
+</div>
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Part-II:-Scraping-Position-Player-Data-for-2011-2021-Seasons">Part II: Scraping Position Player Data for 2011-2021 Seasons<a class="anchor-link" href="#Part-II:-Scraping-Position-Player-Data-for-2011-2021-Seasons">&#182;</a></h3>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">scraping_advanced_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="c1"># Extracting text from webpage</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+
+    <span class="c1"># Parsing the text into html code</span>
+    <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">html</span><span class="p">,</span><span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Finding the table in the html code - we are searching by the id of the table</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">attrs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="s2">&quot;rgMasterTable&quot;</span><span class="p">})</span>
+
+
+    <span class="n">table_data</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">tbody</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">table_data</span><span class="p">:</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="p">()</span>
+        <span class="k">for</span> <span class="n">td</span> <span class="ow">in</span> <span class="n">tr</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;td&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="s1">&#39;</span><span class="se">\xa0</span><span class="s1">&#39;</span> <span class="ow">in</span> <span class="n">td</span><span class="o">.</span><span class="n">text</span><span class="p">:</span>
+                <span class="n">temp</span> <span class="o">+=</span> <span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">,)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">temp</span> <span class="o">+=</span> <span class="p">(</span><span class="n">td</span><span class="o">.</span><span class="n">text</span><span class="p">,)</span>
+        <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+
+    <span class="n">advanced_stats</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">)</span>
+    <span class="n">advanced_stats</span> <span class="o">=</span> <span class="n">advanced_stats</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">to_replace</span><span class="o">=</span><span class="s2">&quot; NULL&quot;</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">table_header</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">thead</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;tr&quot;</span><span class="p">)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">table_header</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">th</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;th&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">th</span><span class="p">:</span>
+                <span class="n">columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">advanced_stats</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">columns</span>
+    <span class="n">advanced_stats</span> <span class="o">=</span> <span class="n">advanced_stats</span><span class="o">.</span><span class="n">assign</span><span class="p">(</span><span class="n">Year</span> <span class="o">=</span> <span class="n">year</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">advanced_stats</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_urls</span><span class="p">(</span><span class="n">team</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://www.fangraphs.com/leaders.aspx?pos=all&amp;stats&#39;</span> \
+      <span class="s1">&#39;=bat&amp;lg=all&amp;qual=0&amp;type=1&amp;season=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;&amp;month=0&amp;season1=&#39;</span> \
+       <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;&amp;ind=0&amp;team=&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">team</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;&amp;rost=0&amp;age=0&amp;filter=&amp;players=0&amp;startdate&#39;</span> \
+      <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;-01-01&amp;enddate=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;-12-31&amp;page=1_50&#39;</span>
+    <span class="k">return</span> <span class="n">url</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[36]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="n">get_urls</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">2021</span><span class="p">)</span>
+<span class="n">teams</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">)]</span>
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2011</span><span class="p">,</span><span class="mi">2022</span><span class="p">)]</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="n">years</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">team</span> <span class="ow">in</span> <span class="n">teams</span><span class="p">:</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">get_urls</span><span class="p">(</span><span class="n">team</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">advanced_batting</span> <span class="o">=</span> <span class="n">scraping_advanced_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">year</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">advanced_batting</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">advanced_batting</span><span class="p">,</span> <span class="n">scraping_advanced_stats</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">year</span><span class="p">)])</span>
+    
+<span class="n">advanced_batting</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[36]:</div>
+
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>#</th>
+      <th>Name</th>
+      <th>PA</th>
+      <th>BB%</th>
+      <th>K%</th>
+      <th>BB/K</th>
+      <th>AVG</th>
+      <th>OBP</th>
+      <th>SLG</th>
+      <th>OPS</th>
+      <th>ISO</th>
+      <th>Spd</th>
+      <th>BABIP</th>
+      <th>UBR</th>
+      <th>wGDP</th>
+      <th>wSB</th>
+      <th>wRC</th>
+      <th>wRAA</th>
+      <th>wOBA</th>
+      <th>wRC+</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Tyler Chatwood</td>
+      <td>5</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>0.00</td>
+      <td>.667</td>
+      <td>.667</td>
+      <td>.667</td>
+      <td>1.333</td>
+      <td>.000</td>
+      <td>2.6</td>
+      <td>.667</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2</td>
+      <td>1.1</td>
+      <td>.594</td>
+      <td>289</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Ervin Santana</td>
+      <td>2</td>
+      <td>0.0%</td>
+      <td>50.0%</td>
+      <td>0.00</td>
+      <td>.500</td>
+      <td>.500</td>
+      <td>.500</td>
+      <td>1.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>1.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.2</td>
+      <td>.445</td>
+      <td>188</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Gil Velazquez</td>
+      <td>7</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>0.00</td>
+      <td>.500</td>
+      <td>.429</td>
+      <td>.500</td>
+      <td>.929</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.429</td>
+      <td>0.0</td>
+      <td>0.1</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>0.4</td>
+      <td>.382</td>
+      <td>145</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>Howie Kendrick</td>
+      <td>583</td>
+      <td>5.7%</td>
+      <td>20.4%</td>
+      <td>0.28</td>
+      <td>.285</td>
+      <td>.338</td>
+      <td>.464</td>
+      <td>.802</td>
+      <td>.179</td>
+      <td>6.2</td>
+      <td>.338</td>
+      <td>2.3</td>
+      <td>-2.2</td>
+      <td>-0.1</td>
+      <td>81</td>
+      <td>15.4</td>
+      <td>.349</td>
+      <td>123</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>Torii Hunter</td>
+      <td>649</td>
+      <td>9.6%</td>
+      <td>19.3%</td>
+      <td>0.50</td>
+      <td>.262</td>
+      <td>.336</td>
+      <td>.429</td>
+      <td>.765</td>
+      <td>.167</td>
+      <td>3.1</td>
+      <td>.297</td>
+      <td>1.3</td>
+      <td>-3.5</td>
+      <td>-2.4</td>
+      <td>84</td>
+      <td>10.7</td>
+      <td>.337</td>
+      <td>115</td>
+      <td>2011</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>45</th>
+      <td>46</td>
+      <td>Tyler Rogers</td>
+      <td>0</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>0.00</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <th>46</th>
+      <td>47</td>
+      <td>Tyler Beede</td>
+      <td>0</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>0.00</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <th>47</th>
+      <td>48</td>
+      <td>Skye Bolt</td>
+      <td>1</td>
+      <td>0.0%</td>
+      <td>100.0%</td>
+      <td>0.00</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>-0.3</td>
+      <td>.000</td>
+      <td>-100</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <th>48</th>
+      <td>49</td>
+      <td>Jarlin Garcia</td>
+      <td>2</td>
+      <td>0.0%</td>
+      <td>100.0%</td>
+      <td>0.00</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>-0.5</td>
+      <td>.000</td>
+      <td>-100</td>
+      <td>2021</td>
+    </tr>
+    <tr>
+      <th>49</th>
+      <td>50</td>
+      <td>Conner Menez</td>
+      <td>0</td>
+      <td>0.0%</td>
+      <td>0.0%</td>
+      <td>0.00</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>.000</td>
+      <td>0.1</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0</td>
+      <td>0.0</td>
+      <td>.000</td>
+      <td>0.0</td>
+      <td>2021</td>
+    </tr>
+  </tbody>
+</table>
+<p>15646 rows × 21 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
